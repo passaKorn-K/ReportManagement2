@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ReportManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Opinion">
+          <Key>
+            <PropertyRef Name="opinionID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="opinionID" Type="int" Nullable="false" />
+          <Property Name="reportID" Type="int" Nullable="false" />
+          <Property Name="projectID" Type="int" Nullable="false" />
+          <Property Name="userCreatedID" Type="varchar(max)" />
+          <Property Name="dateCreated" Type="datetime2" Precision="7" />
+          <Property Name="opinion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="projectID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="projectID" Type="int" Nullable="false" />
+          <Property Name="projectName" Type="varchar(max)" Nullable="false" />
+          <Property Name="projectStatus" Type="varchar" MaxLength="50" />
+          <Property Name="deadline" Type="datetime2" Precision="7" />
+          <Property Name="wages" Type="float" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="reportID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="reportID" Type="int" Nullable="false" />
+          <Property Name="projectID" Type="int" Nullable="false" />
+          <Property Name="reportName" Type="varchar(max)" Nullable="false" />
+          <Property Name="userCreatedID" Type="int" Nullable="false" />
+          <Property Name="dateCreated" Type="datetime2" Precision="7" />
+          <Property Name="userReviewedID" Type="int" />
+          <Property Name="dateReviewed" Type="datetime2" Precision="7" />
+          <Property Name="userApprovedID" Type="int" />
+          <Property Name="dateApproved" Type="datetime2" Precision="7" />
+          <Property Name="status" Type="varchar(max)" />
+          <Property Name="duration" Type="datetime2" Precision="7" />
+        </EntityType>
+        <Association Name="FK_Opinion_Opinion">
+          <End Role="Report" Type="Self.Report" Multiplicity="1" />
+          <End Role="Opinion" Type="Self.Opinion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="reportID" />
+            </Principal>
+            <Dependent Role="Opinion">
+              <PropertyRef Name="reportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Opinion_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Opinion" Type="Self.Opinion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Opinion">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ReportManagementModelStoreContainer">
+          <EntitySet Name="Opinion" EntityType="Self.Opinion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Opinion_Opinion" Association="Self.FK_Opinion_Opinion">
+            <End Role="Report" EntitySet="Report" />
+            <End Role="Opinion" EntitySet="Opinion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Opinion_Project" Association="Self.FK_Opinion_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Opinion" EntitySet="Opinion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Project" Association="Self.FK_Report_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ReportManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Opinion">
+          <Key>
+            <PropertyRef Name="opinionID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="opinionID" Type="Int32" Nullable="false" />
+          <Property Name="reportID" Type="Int32" Nullable="false" />
+          <Property Name="projectID" Type="Int32" Nullable="false" />
+          <Property Name="userCreatedID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="dateCreated" Type="DateTime" Precision="7" />
+          <Property Name="opinion1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Report" Relationship="Self.FK_Opinion_Opinion" FromRole="Opinion" ToRole="Report" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Opinion_Project" FromRole="Opinion" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="projectID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="projectID" Type="Int32" Nullable="false" />
+          <Property Name="projectName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="projectStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="deadline" Type="DateTime" Precision="7" />
+          <Property Name="wages" Type="Double" />
+          <NavigationProperty Name="Opinions" Relationship="Self.FK_Opinion_Project" FromRole="Project" ToRole="Opinion" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK_Report_Project" FromRole="Project" ToRole="Report" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="reportID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="reportID" Type="Int32" Nullable="false" />
+          <Property Name="projectID" Type="Int32" Nullable="false" />
+          <Property Name="reportName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userCreatedID" Type="Int32" Nullable="false" />
+          <Property Name="dateCreated" Type="DateTime" Precision="7" />
+          <Property Name="userReviewedID" Type="Int32" />
+          <Property Name="dateReviewed" Type="DateTime" Precision="7" />
+          <Property Name="userApprovedID" Type="Int32" />
+          <Property Name="dateApproved" Type="DateTime" Precision="7" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="duration" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Opinions" Relationship="Self.FK_Opinion_Opinion" FromRole="Report" ToRole="Opinion" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Report_Project" FromRole="Report" ToRole="Project" />
+        </EntityType>
+        <Association Name="FK_Opinion_Opinion">
+          <End Role="Report" Type="Self.Report" Multiplicity="1" />
+          <End Role="Opinion" Type="Self.Opinion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="reportID" />
+            </Principal>
+            <Dependent Role="Opinion">
+              <PropertyRef Name="reportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Opinion_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Opinion" Type="Self.Opinion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Opinion">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ReportManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Opinions" EntityType="Self.Opinion" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="Reports" EntityType="Self.Report" />
+          <AssociationSet Name="FK_Opinion_Opinion" Association="Self.FK_Opinion_Opinion">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="Opinion" EntitySet="Opinions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Opinion_Project" Association="Self.FK_Opinion_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Opinion" EntitySet="Opinions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Project" Association="Self.FK_Report_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Report" EntitySet="Reports" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ReportManagementModelStoreContainer" CdmEntityContainer="ReportManagementEntities">
+          <EntitySetMapping Name="Opinions">
+            <EntityTypeMapping TypeName="ReportManagementModel.Opinion">
+              <MappingFragment StoreEntitySet="Opinion">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="opinionID" ColumnName="opinionID" />
+                <ScalarProperty Name="reportID" ColumnName="reportID" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="userCreatedID" ColumnName="userCreatedID" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="opinion1" ColumnName="opinion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="ReportManagementModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="projectName" ColumnName="projectName" />
+                <ScalarProperty Name="projectStatus" ColumnName="projectStatus" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+                <ScalarProperty Name="wages" ColumnName="wages" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="ReportManagementModel.Report">
+              <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="reportID" ColumnName="reportID" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="reportName" ColumnName="reportName" />
+                <ScalarProperty Name="userCreatedID" ColumnName="userCreatedID" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="userReviewedID" ColumnName="userReviewedID" />
+                <ScalarProperty Name="dateReviewed" ColumnName="dateReviewed" />
+                <ScalarProperty Name="userApprovedID" ColumnName="userApprovedID" />
+                <ScalarProperty Name="dateApproved" ColumnName="dateApproved" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
