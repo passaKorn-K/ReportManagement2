@@ -1,9 +1,14 @@
-﻿@{
+﻿@model IEnumerable<ReportManagement.Opinion>
+@{
     ViewBag.Title = "Contact";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
+@foreach( var item in Model)
+{
+    @Html.DisplayFor(modelItem => item.userCreatedID);
+}
 <address>
     One Microsoft Way<br />
     Redmond, WA 98052-6399<br />

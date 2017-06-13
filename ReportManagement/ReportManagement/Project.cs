@@ -17,19 +17,15 @@ namespace ReportManagement
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Project()
         {
-            this.Opinions = new HashSet<Opinion>();
             this.Reports = new HashSet<Report>();
         }
     
-        public int ID { get; set; }
-        public int projectID { get; set; }
-        public string projectName { get; set; }
-        public string projectStatus { get; set; }
-        public Nullable<System.DateTime> deadline { get; set; }
-        public Nullable<double> wages { get; set; }
+        public int ProjectID { get; set; }
+        public string ProjectName { get; set; }
+        public string ProjectStatus { get; set; }
+        public Nullable<System.DateTime> Deadline { get; set; }
+        public Nullable<double> Wages { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Opinion> Opinions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Report> Reports { get; set; }
     }

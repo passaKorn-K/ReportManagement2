@@ -12,13 +12,13 @@ namespace ReportManagement
     using System;
     using System.Collections.Generic;
     
-    public partial class Opinion
+    public partial class Action
     {
-        public int OpinionID { get; set; }
+        public int ActionID { get; set; }
+        public string ActionName { get; set; }
+        public int ActionUserID { get; set; }
+        public Nullable<System.DateTime> ActionDate { get; set; }
         public int ReportID { get; set; }
-        public Nullable<int> UserCreatedID { get; set; }
-        public Nullable<System.DateTime> DateCreated { get; set; }
-        public string Opinion1 { get; set; }
     
         public virtual Report Report { get; set; }
         public virtual User User { get; set; }

@@ -153,38 +153,49 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Action.cs">
+      <DependentUpon>Report.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ActionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OpinionController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Opinion.cs">
-      <DependentUpon>ReportContext.tt</DependentUpon>
+      <DependentUpon>Report.tt</DependentUpon>
     </Compile>
     <Compile Include="Project.cs">
-      <DependentUpon>ReportContext.tt</DependentUpon>
+      <DependentUpon>Report.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Report.Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="Report.cs">
-      <DependentUpon>ReportContext.tt</DependentUpon>
+      <DependentUpon>Report.tt</DependentUpon>
     </Compile>
-    <Compile Include="ReportContext.Context.cs">
+    <Compile Include="Report.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ReportContext.Context.tt</DependentUpon>
+      <DependentUpon>Report.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ReportContext.cs">
+    <Compile Include="Report1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ReportContext.tt</DependentUpon>
+      <DependentUpon>Report.tt</DependentUpon>
     </Compile>
-    <Compile Include="ReportContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReportContext.edmx</DependentUpon>
+    <Compile Include="User.cs">
+      <DependentUpon>Report.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -207,23 +218,23 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="ReportContext.edmx">
+    <EntityDeploy Include="Report.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ReportContext.Designer.cs</LastGenOutput>
+      <LastGenOutput>Report.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="ReportContext.edmx.diagram">
-      <DependentUpon>ReportContext.edmx</DependentUpon>
+    <Content Include="Report.edmx.diagram">
+      <DependentUpon>Report.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="ReportContext.Context.tt">
+    <Content Include="Report.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ReportContext.Context.cs</LastGenOutput>
-      <DependentUpon>ReportContext.edmx</DependentUpon>
+      <DependentUpon>Report.edmx</DependentUpon>
+      <LastGenOutput>Report.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ReportContext.tt">
+    <Content Include="Report.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ReportContext.edmx</DependentUpon>
-      <LastGenOutput>ReportContext.cs</LastGenOutput>
+      <DependentUpon>Report.edmx</DependentUpon>
+      <LastGenOutput>Report1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -255,6 +266,31 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\Project\Delete.cshtml" />
+    <Content Include="Views\Project\Details.cshtml" />
+    <Content Include="Views\Project\Edit.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Report\Create.cshtml" />
+    <Content Include="Views\Report\Delete.cshtml" />
+    <Content Include="Views\Report\Details.cshtml" />
+    <Content Include="Views\Report\Edit.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Opinion\Create.cshtml" />
+    <Content Include="Views\Opinion\Delete.cshtml" />
+    <Content Include="Views\Opinion\Details.cshtml" />
+    <Content Include="Views\Opinion\Edit.cshtml" />
+    <Content Include="Views\Opinion\Index.cshtml" />
+    <Content Include="Views\Action\Create.cshtml" />
+    <Content Include="Views\Action\Delete.cshtml" />
+    <Content Include="Views\Action\Details.cshtml" />
+    <Content Include="Views\Action\Edit.cshtml" />
+    <Content Include="Views\Action\Index.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

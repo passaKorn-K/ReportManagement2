@@ -13,10 +13,10 @@ namespace ReportManagement
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ReportManagementEntities : DbContext
+    public partial class ReportEntities : DbContext
     {
-        public ReportManagementEntities()
-            : base("name=ReportManagementEntities")
+        public ReportEntities()
+            : base("name=ReportEntities")
         {
         }
     
@@ -25,8 +25,10 @@ namespace ReportManagement
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Action> Actions { get; set; }
         public virtual DbSet<Opinion> Opinions { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

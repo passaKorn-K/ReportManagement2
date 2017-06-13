@@ -8,6 +8,7 @@ namespace ReportManagement.Controllers
 {
     public class HomeController : Controller
     {
+        //private ReportManagementEntities db = new ReportManagementEntities();
         public ActionResult Index()
         {
             return View();
@@ -24,6 +25,7 @@ namespace ReportManagement.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            //return View(db.Opinions.ToList());
             return View();
         }
     }
