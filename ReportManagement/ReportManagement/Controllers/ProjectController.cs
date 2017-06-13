@@ -20,33 +20,64 @@ namespace ReportManagement.Controllers
         //{
         //    return View(db.Projects.ToList());
         //}
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(User objUser)
+        {
+            if (ModelState.IsValid)
+            {
+                {
+                    var obj = db.Users.Where(a => a.Username.Equals(objUser.Username) && a.Password.Equals(objUser.Password)).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        Session["UserID"] = obj.UserID.ToString();
+                        Session["Username"] = obj.Username.ToString();
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            return View(objUser);
+        }
 
         public ActionResult Index(int? id, int? reportID)
         {
-            var viewModel = new ProjectSummary();
-            viewModel.Projects = db.Projects
-                                .Include(i => i.Reports)
-                                .OrderBy(i => i.ProjectName);
 
-            if( id != null)
+            if (Session["UserID"] != null)
             {
-                ViewBag.ProjectID = id.Value;
-                viewModel.Reports = viewModel.Projects.Where(i => i.ProjectID == id.Value).Single().Reports;
-            }
+                var viewModel = new ProjectSummary();
+                viewModel.Projects = db.Projects
+                                    .Include(i => i.Reports)
+                                    .OrderBy(i => i.ProjectName);
 
-            if(reportID != null)
-            {
-                ViewBag.ReportID = reportID.Value;
-                var selectedReport = viewModel.Reports.Where(x => x.ReportID == reportID).Single();
-                db.Entry(selectedReport).Collection(x => x.Opinions).Load();
-                foreach (Opinion opinion in selectedReport.Opinions)
+                if (id != null)
                 {
-                    db.Entry(opinion).Reference(x => x.User).Load();
+                    ViewBag.ProjectID = id.Value;
+                    viewModel.Reports = viewModel.Projects.Where(i => i.ProjectID == id.Value).Single().Reports;
                 }
-                viewModel.Opinions = selectedReport.Opinions;
+
+                if (reportID != null)
+                {
+                    ViewBag.ReportID = reportID.Value;
+                    var selectedReport = viewModel.Reports.Where(x => x.ReportID == reportID).Single();
+                    db.Entry(selectedReport).Collection(x => x.Opinions).Load();
+                    foreach (Opinion opinion in selectedReport.Opinions)
+                    {
+                        db.Entry(opinion).Reference(x => x.User).Load();
+                    }
+                    viewModel.Opinions = selectedReport.Opinions;
+                }
+                //return View(db.Projects.ToList());
+                return View(viewModel);
             }
-            //return View(db.Projects.ToList());
-            return View(viewModel);
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
         // GET: Project/Details/5
