@@ -47,12 +47,14 @@
         </EntityType>
         <EntityType Name="User">
           <Key>
-            <PropertyRef Name="userID" />
+            <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="firstName" Type="varchar(max)" />
-          <Property Name="lastName" Type="varchar(max)" />
-          <Property Name="position" Type="varchar(max)" />
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar(max)" />
+          <Property Name="LastName" Type="varchar(max)" />
+          <Property Name="Position" Type="varchar(max)" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="Username" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK_Action_Report">
           <End Role="Report" Type="Self.Report" Multiplicity="1" />
@@ -71,7 +73,7 @@
           <End Role="Action" Type="Self.Action" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
-              <PropertyRef Name="userID" />
+              <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="Action">
               <PropertyRef Name="ActionUserID" />
@@ -95,7 +97,7 @@
           <End Role="Opinion" Type="Self.Opinion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
-              <PropertyRef Name="userID" />
+              <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="Opinion">
               <PropertyRef Name="UserCreatedID" />
@@ -196,12 +198,14 @@
         </EntityType>
         <EntityType Name="User">
           <Key>
-            <PropertyRef Name="userID" />
+            <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="firstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="lastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="position" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Actions" Relationship="Self.FK_Action_User" FromRole="User" ToRole="Action" />
           <NavigationProperty Name="Opinions" Relationship="Self.FK_Opinion_User" FromRole="User" ToRole="Opinion" />
         </EntityType>
@@ -222,7 +226,7 @@
           <End Role="Action" Type="Self.Action" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
-              <PropertyRef Name="userID" />
+              <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="Action">
               <PropertyRef Name="ActionUserID" />
@@ -246,7 +250,7 @@
           <End Role="Opinion" Type="Self.Opinion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
-              <PropertyRef Name="userID" />
+              <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="Opinion">
               <PropertyRef Name="UserCreatedID" />
@@ -345,10 +349,12 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="ReportManagementModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="userID" ColumnName="userID" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
