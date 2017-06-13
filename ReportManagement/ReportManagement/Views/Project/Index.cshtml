@@ -1,7 +1,9 @@
-﻿@model IEnumerable<ReportManagement.Project>
+﻿@*@model IEnumerable<ReportManagement.Project>*@
+@model ReportManagement.ViewModel.ProjectSummary
+
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Project Summary";
 }
 
 <h2>Index</h2>
@@ -9,7 +11,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ProjectName)
@@ -24,28 +26,141 @@
             @Html.DisplayNameFor(model => model.Wages)
         </th>
         <th></th>
+    </tr>*@
+
+@*@foreach (var item in Model.Projects) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wages)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ProjectID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ProjectID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ProjectID })
+            </td>
+        </tr>
+    }
+
+    </table>*@
+
+<table class="table">
+    <tr>
+        <th>Project</th>
+        <th>Project Status</th>
+        <th>Deadline</th>
+        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjectName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjectStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Deadline)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Wages)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProjectID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProjectID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProjectID })
-        </td>
-    </tr>
+    @foreach (var item in Model.Projects)
+    {
+        string selectedRow = "";
+        if (item.ProjectID == ViewBag.ProjectID)
+        {
+            selectedRow = "success";
+        }
+
+        <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline)
+            </td>
+            <td>
+                @{
+                    foreach (var report in item.Reports)
+                    {
+                        @report.ReportName @: @report.Status <br />
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Select", "Index", new { id = item.ProjectID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProjectID })
+                @Html.ActionLink("Details", "Details", new { id = item.ProjectID })
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProjectID })
+            </td>
+        </tr>
+     }
+</table>
+
+@if(Model.Reports != null)
+{
+    <h3>Report Related With Project</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Report Name</th>
+            <th>Report Status</th>
+            <th>Report Duration</th>
+        </tr>
+
+        @foreach( var item in Model.Reports)
+        {
+            string selectedRow = "";
+            if(item.ReportID == ViewBag.ReportID)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.ActionLink("Select", "Index", new { reportID = item.ReportID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReportName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+
+            </tr>
+        }
+    </table>
 }
 
-</table>
+@if(Model.Opinions != null)
+{
+    <h3>
+        Opinion Created in Report
+    </h3>
+    <table class="table">
+        <tr>
+            <th>Opinion</th>
+            <th>Created By</th>
+            <th>Position</th>
+            <th>Created Date</th>
+        </tr>
+        @foreach( var item in Model.Opinions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Opinion1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.firstName) @Html.DisplayFor(modelItem => item.User.lastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.User.position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+            </tr>
+        }
+    </table>
+}

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ReportManagement;
+using ReportManagement.ViewModel;
 
 namespace ReportManagement.Controllers
 {
@@ -15,9 +16,37 @@ namespace ReportManagement.Controllers
         private ReportEntities db = new ReportEntities();
 
         // GET: Project
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View(db.Projects.ToList());
+        //}
+
+        public ActionResult Index(int? id, int? reportID)
         {
-            return View(db.Projects.ToList());
+            var viewModel = new ProjectSummary();
+            viewModel.Projects = db.Projects
+                                .Include(i => i.Reports)
+                                .OrderBy(i => i.ProjectName);
+
+            if( id != null)
+            {
+                ViewBag.ProjectID = id.Value;
+                viewModel.Reports = viewModel.Projects.Where(i => i.ProjectID == id.Value).Single().Reports;
+            }
+
+            if(reportID != null)
+            {
+                ViewBag.ReportID = reportID.Value;
+                var selectedReport = viewModel.Reports.Where(x => x.ReportID == reportID).Single();
+                db.Entry(selectedReport).Collection(x => x.Opinions).Load();
+                foreach (Opinion opinion in selectedReport.Opinions)
+                {
+                    db.Entry(opinion).Reference(x => x.User).Load();
+                }
+                viewModel.Opinions = selectedReport.Opinions;
+            }
+            //return View(db.Projects.ToList());
+            return View(viewModel);
         }
 
         // GET: Project/Details/5

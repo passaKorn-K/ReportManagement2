@@ -197,6 +197,7 @@
     <Compile Include="User.cs">
       <DependentUpon>Report.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ProjectSummary.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
