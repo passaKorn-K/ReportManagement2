@@ -153,9 +153,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Action.cs">
-      <DependentUpon>Report.tt</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -169,34 +166,37 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Opinion.cs">
+    <Compile Include="Models\Action.cs">
       <DependentUpon>Report.tt</DependentUpon>
     </Compile>
-    <Compile Include="Project.cs">
+    <Compile Include="Models\Opinion.cs">
       <DependentUpon>Report.tt</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report.Context.cs">
+    <Compile Include="Models\Project.cs">
+      <DependentUpon>Report.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Report.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Report.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Report.cs">
+    <Compile Include="Models\Report.cs">
       <DependentUpon>Report.tt</DependentUpon>
     </Compile>
-    <Compile Include="Report.Designer.cs">
+    <Compile Include="Models\Report.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Report.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Report1.cs">
+    <Compile Include="Models\Report1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Report.tt</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
+    <Compile Include="Models\User.cs">
       <DependentUpon>Report.tt</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ProjectSummary.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -219,20 +219,20 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Report.edmx">
+    <EntityDeploy Include="Models\Report.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Report.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Report.edmx.diagram">
+    <Content Include="Models\Report.edmx.diagram">
       <DependentUpon>Report.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Report.Context.tt">
+    <Content Include="Models\Report.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Report.edmx</DependentUpon>
       <LastGenOutput>Report.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Report.tt">
+    <Content Include="Models\Report.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Report.edmx</DependentUpon>
       <LastGenOutput>Report1.cs</LastGenOutput>
@@ -296,7 +296,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

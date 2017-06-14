@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ReportManagement;
+using ReportManagement.Models;
 
 namespace ReportManagement.Controllers
 {
@@ -28,7 +28,7 @@ namespace ReportManagement.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Action action = db.Actions.Find(id);
+            Models.Action action = db.Actions.Find(id);
             if (action == null)
             {
                 return HttpNotFound();
@@ -49,7 +49,7 @@ namespace ReportManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ActionID,ActionName,ActionUserID,ActionDate,ReportID")] Action action)
+        public ActionResult Create([Bind(Include = "ActionID,ActionName,ActionUserID,ActionDate,ReportID")] Models.Action action)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace ReportManagement.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Action action = db.Actions.Find(id);
+            Models.Action action = db.Actions.Find(id);
             if (action == null)
             {
                 return HttpNotFound();
@@ -85,7 +85,7 @@ namespace ReportManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ActionID,ActionName,ActionUserID,ActionDate,ReportID")] Action action)
+        public ActionResult Edit([Bind(Include = "ActionID,ActionName,ActionUserID,ActionDate,ReportID")] Models.Action action)
         {
             if (ModelState.IsValid)
             {
@@ -105,7 +105,7 @@ namespace ReportManagement.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Action action = db.Actions.Find(id);
+            Models.Action action = db.Actions.Find(id);
             if (action == null)
             {
                 return HttpNotFound();
@@ -118,7 +118,7 @@ namespace ReportManagement.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Action action = db.Actions.Find(id);
+            Models.Action action = db.Actions.Find(id);
             db.Actions.Remove(action);
             db.SaveChanges();
             return RedirectToAction("Index");

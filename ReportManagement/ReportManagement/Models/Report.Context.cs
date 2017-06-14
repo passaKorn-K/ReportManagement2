@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ReportManagement
+namespace ReportManagement.Models
 {
     using System;
     using System.Data.Entity;

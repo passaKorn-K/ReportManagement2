@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ReportManagement.Opinion>
+﻿@model IEnumerable<ReportManagement.Models.Opinion>
 
 @{
     ViewBag.Title = "Index";
@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.Report.ReportName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.firstName)
+            @Html.DisplayNameFor(model => model.User.FirstName)
         </th>
         <th></th>
     </tr>
@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.Report.ReportName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.User.firstName)
+            @Html.DisplayFor(modelItem => item.User.FirstName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.OpinionID }) |

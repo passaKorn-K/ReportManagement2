@@ -7,26 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ReportManagement
+namespace ReportManagement.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Project
+    public partial class Report
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Project()
+        public Report()
         {
-            this.Reports = new HashSet<Report>();
+            this.Actions = new HashSet<Action>();
+            this.Opinions = new HashSet<Opinion>();
         }
     
-        public int ProjectID { get; set; }
-        public string ProjectName { get; set; }
-        public string ProjectStatus { get; set; }
-        public Nullable<System.DateTime> Deadline { get; set; }
-        public Nullable<double> Wages { get; set; }
+        public int ReportID { get; set; }
+        public string ReportName { get; set; }
+        public string Status { get; set; }
+        public Nullable<int> Duration { get; set; }
+        public Nullable<int> ProjectID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Report> Reports { get; set; }
+        public virtual ICollection<Action> Actions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Opinion> Opinions { get; set; }
+        public virtual Project Project { get; set; }
     }
 }

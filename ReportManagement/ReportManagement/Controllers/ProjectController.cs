@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ReportManagement;
+using ReportManagement.Models;
 using ReportManagement.ViewModel;
 
 namespace ReportManagement.Controllers

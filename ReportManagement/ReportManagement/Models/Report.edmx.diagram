@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c8c06cebb9104cc4bb0b7557ad1987f9" Name="Diagram1">
+      <Diagram DiagramId="5c3387ce166e482cbe409c4f1086481c" Name="Diagram1">
         <EntityTypeShape EntityType="ReportManagementModel.Action" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ReportManagementModel.Opinion" Width="1.5" PointX="8.25" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ReportManagementModel.Project" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
