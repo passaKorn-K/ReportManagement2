@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using ReportManagement.Models;
 using ReportManagement.ViewModel;
+using ReportManagement.Filters;
 
 namespace ReportManagement.Controllers
 {
+    [Log]
     public class ProjectController : Controller
     {
         private ReportEntities db = new ReportEntities();
@@ -22,6 +24,7 @@ namespace ReportManagement.Controllers
         //}
         public ActionResult Login()
         {
+           
             return View();
         }
 
@@ -31,17 +34,28 @@ namespace ReportManagement.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 {
                     var obj = db.Users.Where(a => a.Username.Equals(objUser.Username) && a.Password.Equals(objUser.Password)).FirstOrDefault();
                     if (obj != null)
                     {
                         Session["UserID"] = obj.UserID.ToString();
                         Session["Username"] = obj.Username.ToString();
+                        Session["Position"] = obj.Position.ToString();
+
                         return RedirectToAction("Index");
                     }
                 }
             }
+            ViewBag.Position = new SelectList(db.Users, "UserID", "Position");
             return View(objUser);
+        }
+        public void Logout()
+        {
+            if(Session != null)
+            {
+                Session.Abandon();
+            }
         }
 
         public ActionResult Index(int? id, int? reportID)
@@ -98,7 +112,13 @@ namespace ReportManagement.Controllers
         // GET: Project/Create
         public ActionResult Create()
         {
+            //if (Session["Position"].Equals("Project Manager"))
+            //{
+            //    return View();
+            //}
+            //return RedirectToAction("Index");
             return View();
+           
         }
 
         // POST: Project/Create
@@ -108,6 +128,7 @@ namespace ReportManagement.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProjectID,ProjectName,ProjectStatus,Deadline,Wages")] Project project)
         {
+
             if (ModelState.IsValid)
             {
                 db.Projects.Add(project);
@@ -116,6 +137,7 @@ namespace ReportManagement.Controllers
             }
 
             return View(project);
+
         }
 
         // GET: Project/Edit/5

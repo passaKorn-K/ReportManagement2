@@ -37,31 +37,42 @@ namespace ReportManagement.Controllers
         }
 
         // GET: Action/Create
-        public ActionResult Create()
+        public ActionResult Create(int id, int userID, string actionName, DateTime? date)
         {
-            ViewBag.ReportID = new SelectList(db.Reports, "ReportID", "ReportName");
-            ViewBag.ActionUserID = new SelectList(db.Users, "userID", "firstName");
-            return View();
+            //ViewBag.ReportID = new SelectList(db.Reports, "ReportID", "ReportName");
+            //ViewBag.ActionUserID = new SelectList(db.Users, "userID", "firstName");
+            Models.Action action = new Models.Action();
+            
+            action.ReportID = id;
+            action.ActionUserID = userID;
+            action.ActionName = actionName;
+            action.ActionDate = date;
+
+            db.Actions.Add(action);
+            db.SaveChanges();
+
+            //return View(action);
+            return RedirectToAction("Index", "Action");
         }
 
         // POST: Action/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ActionID,ActionName,ActionUserID,ActionDate,ReportID")] Models.Action action)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Actions.Add(action);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ActionID,ActionName,ActionUserID,ActionDate,ReportID")] Models.Action action)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Actions.Add(action);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.ReportID = new SelectList(db.Reports, "ReportID", "ReportName", action.ReportID);
-            ViewBag.ActionUserID = new SelectList(db.Users, "userID", "firstName", action.ActionUserID);
-            return View(action);
-        }
+        //    //ViewBag.ReportID = new SelectList(db.Reports, "ReportID", "ReportName", action.ReportID);
+        //    //ViewBag.ActionUserID = new SelectList(db.Users, "userID", "firstName", action.ActionUserID);
+        //    return View(action);
+        //}
 
         // GET: Action/Edit/5
         public ActionResult Edit(int? id)
